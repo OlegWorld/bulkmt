@@ -16,7 +16,7 @@ before_script:
 script:
 - cmake .
 - cmake --build .
-- cmake --build . --target test
+- ctest . --verbose
 - cmake --build . --target package
 deploy:
 - provider: script

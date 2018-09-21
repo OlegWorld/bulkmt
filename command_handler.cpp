@@ -3,8 +3,9 @@
 CommandHandler::CommandHandler(size_t commandPackSize,
                                size_t loggers_num,
                                std::istream& input)
-:   m_reader(m_data, commandPackSize, input),
-    m_log(loggers_num)
+:   m_log(loggers_num),
+    m_reader(m_data, commandPackSize, input)
+
 {
     m_reader.subscribe(&m_processor);
     m_reader.subscribe(&m_log);
