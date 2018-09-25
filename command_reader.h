@@ -25,7 +25,7 @@ public:
 
     void push_bulk(CommandBulk& name);
 
-    void stop();
+    void stop(CommandBulk& name);
 
     void switch_state();
 

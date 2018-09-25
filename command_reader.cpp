@@ -35,8 +35,9 @@ void CommandReader::push_bulk(CommandBulk& b) {
     recycle_data();
 }
 
-void CommandReader::stop() {
+void CommandReader::stop(CommandBulk& b) {
     m_work_flag = false;
+    push_bulk(b);
     for (auto& obs : m_observers)
         obs->stop();
 }
@@ -93,8 +94,8 @@ void NormalState::read_commands(CommandReader* reader) {
         std::getline(m_input, name);
 
         if (name.empty()) {
-            reader->stop();
-            break;
+            reader->stop(bulk);
+            return;
         }
 
         if (name == "{") {
@@ -133,8 +134,8 @@ void BracedState::read_commands(CommandReader* reader) {
     while(std::getline(m_input, name)) {
         if (name.empty()) {
             bulk.clear();
-            reader->stop();
-            break;
+            reader->stop(bulk);
+            return;
         }
 
         if (name == "{") {

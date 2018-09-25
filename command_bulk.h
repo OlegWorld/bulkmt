@@ -4,7 +4,6 @@
 #include <deque>
 #include <iostream>
 #include <fstream>
-#include <atomic>
 
 using command_name_t = std::string;
 
@@ -28,8 +27,8 @@ public:
 private:
     std::deque<command_name_t> m_command_queue;
 
-    mutable std::atomic_bool m_printed;
-    mutable std::atomic_bool m_logged;
+    mutable bool m_printed;
+    mutable bool m_logged;
 };
 
 std::ostream& operator<<(std::ostream& os, const CommandBulk& b);

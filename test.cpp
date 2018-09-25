@@ -159,6 +159,7 @@ TEST(BulkMTTest, ReaderProcessorSwitchDoubleTest) {
     CommandReader reader(data, 2, inputStream);
     reader.subscribe(&processor);
 
+    while(!processor.ready());
     testing::internal::CaptureStdout();
     reader.scan_input();
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
@@ -185,6 +186,7 @@ TEST(BulkMTTest, ReaderSingleLogSwitchDoubleTest) {
     CommandReader reader(data, 2, inputStream);
     reader.subscribe(&log);
 
+    while(!log.ready());
     reader.scan_input();
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
@@ -215,6 +217,7 @@ TEST(BulkMTTest, ReaderDoubleLogSwitchDoubleTest) {
     CommandReader reader(data, 2, inputStream);
     reader.subscribe(&log);
 
+    while(!log.ready());
     reader.scan_input();
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
